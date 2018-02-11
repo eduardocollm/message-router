@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class MessageRouterController {
 
     private static final String LOG = "LOGGER";
+    private static final String COMMAND = "COMMANDLINE";
 
     @Autowired
     private MessageRouterService loggerRouterService;
+
+    @Autowired
+    private MessageRouterService commandLineRouterService;
 
     @RequestMapping(value = "/message", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
@@ -25,6 +29,8 @@ public class MessageRouterController {
 
         if (LOG.equalsIgnoreCase(request.getTarget())) {
             response.setResponse(loggerRouterService.sendMessage(request.getMessage()));
+        } else if (COMMAND.equalsIgnoreCase(request.getTarget())) {
+            response.setResponse(commandLineRouterService.sendMessage(request.getMessage()));
         } else {
             response.setResponse(new StringBuilder("no route target specified for message [").append(request.getMessage()).append("]").toString());
         }
