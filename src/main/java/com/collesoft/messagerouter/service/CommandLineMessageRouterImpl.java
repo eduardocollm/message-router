@@ -17,6 +17,7 @@ public class CommandLineMessageRouterImpl implements MessageRouterService {
         StringBuffer output = new StringBuffer();
 
         try {
+            log.info("executing shell command [{}]", message);
             p = Runtime.getRuntime().exec(message);
             p.waitFor();
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
