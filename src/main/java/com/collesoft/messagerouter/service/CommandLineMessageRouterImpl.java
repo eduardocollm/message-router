@@ -28,7 +28,7 @@ public class CommandLineMessageRouterImpl implements MessageRouterService {
                 output.append(line + '\n');
             }
         } catch (IOException e) {
-            log.error("IO Error reading input stream from command");
+            log.error("I/O Error reading input stream from command");
             return "no response";
         } catch (Exception e) {
             log.error("error executing command", e);
